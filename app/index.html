@@ -23,6 +23,9 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <div class="container">
+     <div ng-include='"views/navBar.html"'></div>
+    </div>
     <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -67,6 +70,11 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/repoInfo.js"></script>
+        <script src="scripts/controllers/contributorInfo.js"></script>
+
+
+        <script src="scripts/services/GitHubService.js"></script>
         <!-- endbuild -->
 </body>
 </html>
