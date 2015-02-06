@@ -5,11 +5,14 @@ angular.module('githubRepoViewerApp')
     $scope.contributor = $routeParams.contributor;
     $scope.repositories;
 
+
+  if (!$rootScope.contributorInfo) {
    GitHubService.getUserRepositories($rootScope.contributorInfo.repos_url).then(function(data){
       $scope.repositories = data;
    }, function(reason){
     console.log("no repositories");
    });
+  }
 
    $scope.showRepoInfo = function(repository) {
     $location.url('/owner/' + $scope.contributor + '/repo/' + repository);

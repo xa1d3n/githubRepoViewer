@@ -68,6 +68,18 @@ angular.module('githubRepoViewerApp')
            deferred.reject(data);
         }); 
         return deferred.promise;
+    },
+
+    getAvatar: function(url) {
+      var deferred = $q.defer();
+      $http.get(url)
+        .success(function(data) {
+          deferred.resolve(data);
+        })
+        .error(function(data, status, headers, config) {
+           deferred.reject(data);
+        }); 
+      return deferred.promise;
     }
 
 
