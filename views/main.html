@@ -1,17 +1,1 @@
-
-
-<div class="jumbotron">
-  <p class="">
-    Enter name of GitHub repository and click the Go! button.
-  </p>
-
-  <div class="input-group">
-      <input type="text" class="form-control" placeholder="GitHub repository (E.g. maxmind/libmaxminddb)" data-ng-model="repoName">
-      <span class="input-group-btn">
-        <button class="btn btn-primary" type="button" data-ng-click="pullData()">Go!</button>
-      </span>
-  </div><!-- /input-group -->
-  <div class="alert alert-danger" data-ng-repeat="error in errors">
-	{{ error }}
-  </div>
-</div>
+<div class="jumbotron"><p class="">Enter name of GitHub repository and click the Go! button.</p><div class="input-group"><input type="text" class="form-control" placeholder="GitHub repository (E.g. maxmind/libmaxminddb)" data-ng-model="repoName"><span class="input-group-btn"><button class="btn btn-primary" type="button" data-ng-click="pullData()">Go!</button></span></div><!-- /input-group --><div class="alert alert-danger" data-ng-repeat="error in errors">{{ error }}</div></div>
