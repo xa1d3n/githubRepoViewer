@@ -8,7 +8,7 @@ angular.module('githubRepoViewerApp')
     $rootScope.contributorInfo;
 
     var setContributors = function(url) {
-      GitHubService.getContributors(url).then (function(data) {
+      GitHubService.getGithubData(url).then (function(data) {
         $scope.contributors = data;
       }, function(reason) {
         console.log("FD");

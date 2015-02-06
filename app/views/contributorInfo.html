@@ -1,20 +1,28 @@
-<div class="header">
 
 
-<div class="jumbotron">
+<div class="row">
+  <div class="col-md-4">
 
+  	<div class="thumbnail">
+          <img src="{{contributorInfo.avatar_url}}" style="height: 230px; width: 23Opx; display: block;">
+          <div class="caption">
+            <h3>{{contributorInfo.name}}</h3>
+            <h4>{{contributorInfo.login}}</h4>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 
-  <div class="list-group" >
-  <p class="lead pull-left">
-    Contributor Info {{contributor}}
-  </p>
-  <a  class="list-group-item" ng-click='showRepoInfo(repository.name)' ng-repeat='repository in repositories'>{{repository.name}}</a>
+          </div>
+        </div>
+  </div>
+  <div class="col-md-8">
+  	<p><input type='search' class='form-control' placeholder='Find a repository...' ng-model='query' /></p>
+	<div class="list-group">
+	      <a href="" class="list-group-item" ng-repeat='repository in repositories | filter: query' ng-click='showRepoInfo(repository.name)'>
+	        <h4 class="list-group-item-heading">{{repository.name}}</h4>
+	        <p class="list-group-item-text">{{repository.description}}</p>
+	      </a>
+	</div>
 
-</div>
-
-
-
-
+  </div>
 </div>
 
 
