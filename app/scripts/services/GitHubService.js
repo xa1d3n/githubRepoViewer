@@ -4,6 +4,10 @@ angular.module('githubRepoViewerApp')
   .service('GitHubService', function ($http, $q) {
 
   return {
+    /*
+     * Returns data related to supplied repository name
+     * @param {string} repositoryName - name of repository
+     */
     getRepository: function(repositoryName) {
       if (repositoryName) {
         var deferred = $q.defer();
@@ -18,6 +22,10 @@ angular.module('githubRepoViewerApp')
       }
     },
 
+    /*
+     * Returns data related to supplied github url
+     * @param {string} url - github url
+     */
     getGithubData: function(url) {
       if (url) {
         var deferred = $q.defer();
@@ -32,6 +40,10 @@ angular.module('githubRepoViewerApp')
       }
     },
 
+    /*
+     * Returns data related to supplied github user
+     * @param {string} url - github username
+     */
     getUserInfo: function(user) {
       if (user) {
         var deferred = $q.defer();
@@ -47,8 +59,9 @@ angular.module('githubRepoViewerApp')
     },
 
     /*
-      Formats GMT date
-    */
+     * Formats supplied iso date. 
+     * @param {string} date - iso date input
+     */
     formatDate: function(dateInput) {
       var date = new Date(dateInput);
       var month = this.formatMonth(date.getMonth());

@@ -7,8 +7,9 @@ angular.module('githubRepoViewerApp')
     $scope.errors = [];
 
   	$scope.pullData = function() {
-  		if ($scope.repoName) {
 
+  		// check text input-> make http request to github-> redirect to repository page
+  		if ($scope.repoName) {
 			GitHubService.getRepository($scope.repoName).then (function(data) {
 		  		$rootScope.repoInfo = data;
 		  		$location.url('/owner/' + $rootScope.repoInfo.owner.login + '/repo/' + $rootScope.repoInfo.name);

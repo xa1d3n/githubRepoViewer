@@ -10,6 +10,10 @@ angular.module('githubRepoViewerApp')
     $scope.contributors;
     $rootScope.contributorInfo;
 
+    /*
+     * Retreive list of contributors related to repo
+     * @param {url} url - github url
+     */
     var setContributors = function(url) {
       GitHubService.getGithubData(url).then (function(data) {
         $scope.contributors = data;
@@ -18,6 +22,10 @@ angular.module('githubRepoViewerApp')
       });
     }
 
+    /*
+     * Check rootscope containing repo info.
+     * Make http request if it's null.
+     */
     if (!$rootScope.repoInfo) {
       var repoInfo = $scope.owner + '/' + $scope.repo;
 
@@ -36,6 +44,10 @@ angular.module('githubRepoViewerApp')
       setContributors($rootScope.repoInfo.contributors_url);
     }
 
+    /*
+     * Go to the contributor page.
+     * @param {string} contributor - name of github user
+     */
     $scope.showContributorInfo = function(contributor) {
       if (contributor) {
         GitHubService.getUserInfo(contributor).then (function(data) {
