@@ -5,40 +5,45 @@ angular.module('githubRepoViewerApp')
 
   return {
     getRepository: function(repositoryName) {
-      var deferred = $q.defer();
-      $http.get("https://api.github.com/repos/" + repositoryName)
-        .success(function(data) {
-          deferred.resolve(data);
-        })
-        .error(function(data, status, headers, config) {
-           deferred.reject(data);
-        }); 
-        return deferred.promise;
+      if (repositoryName) {
+        var deferred = $q.defer();
+        $http.get("https://api.github.com/repos/" + repositoryName)
+          .success(function(data) {
+            deferred.resolve(data);
+          })
+          .error(function(data, status, headers, config) {
+             deferred.reject(data);
+          }); 
+          return deferred.promise;
+      }
     },
-
+    
     getGithubData: function(url) {
-
-      var deferred = $q.defer();
-      $http.get(url)
-        .success(function(data) {
-          deferred.resolve(data);
-        })
-        .error(function(data, status, headers, config) {
-           deferred.reject(data);
-        }); 
-        return deferred.promise;
+      if (url) {
+        var deferred = $q.defer();
+        $http.get(url)
+          .success(function(data) {
+            deferred.resolve(data);
+          })
+          .error(function(data, status, headers, config) {
+             deferred.reject(data);
+          }); 
+          return deferred.promise;
+      }
     },
 
     getUserInfo: function(user) {
-      var deferred = $q.defer();
-      $http.get('https://api.github.com/users/' + user) 
-        .success(function(data) {
-          deferred.resolve(data);
-        })
-        .error(function(data) {
-          deferred.reject(data);
-        });
-        return deferred.promise;
+      if (user) {
+        var deferred = $q.defer();
+        $http.get('https://api.github.com/users/' + user) 
+          .success(function(data) {
+            deferred.resolve(data);
+          })
+          .error(function(data) {
+            deferred.reject(data);
+          });
+          return deferred.promise;
+      }
     }
 
 

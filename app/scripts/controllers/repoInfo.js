@@ -4,6 +4,7 @@ angular.module('githubRepoViewerApp')
   .controller('RepoInfoCtrl', function ($scope, $rootScope, $routeParams, $location, GitHubService) {
     $scope.owner = $routeParams.owner;
     $scope.repo = $routeParams.name;
+    $scope.errors = [];
     $scope.contributors;
     $rootScope.contributorInfo;
 
@@ -11,7 +12,7 @@ angular.module('githubRepoViewerApp')
       GitHubService.getGithubData(url).then (function(data) {
         $scope.contributors = data;
       }, function(reason) {
-        console.log("FD");
+        $scope.errors.push("No contributors found");
       });
     }
 
@@ -39,7 +40,7 @@ angular.module('githubRepoViewerApp')
     }
 
 
-    
+
 
 
 

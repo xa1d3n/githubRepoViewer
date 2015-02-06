@@ -71,6 +71,15 @@ body {
     margin-top: 28px;
 }
 
+/* custom code */
+.page-header {
+    margin-top: -10px;
+}
+
+.alert-danger {
+    margin-top: 10px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
