@@ -4,6 +4,8 @@ angular.module('githubRepoViewerApp')
   .controller('RepoInfoCtrl', function ($scope, $rootScope, $routeParams, $location, GitHubService) {
     $scope.owner = $routeParams.owner;
     $scope.repo = $routeParams.name;
+    $scope.createdAt;
+    $scope.lastUpdate;
     $scope.errors = [];
     $scope.contributors;
     $rootScope.contributorInfo;
@@ -12,7 +14,7 @@ angular.module('githubRepoViewerApp')
       GitHubService.getGithubData(url).then (function(data) {
         $scope.contributors = data;
       }, function(reason) {
-        $scope.errors.push("No contributors found");
+        $scope.errors.push("Failed to retreive contributors");
       });
     }
 
@@ -21,12 +23,16 @@ angular.module('githubRepoViewerApp')
 
       GitHubService.getRepository(repoInfo).then (function(data) {
         $rootScope.repoInfo = data;
+        $scope.createdAt = GitHubService.formatDate($rootScope.repoInfo.created_at);
+        $scope.lastUpdate = GitHubService.formatDate($rootScope.repoInfo.updated_at);
         setContributors(data.contributors_url);
       }, function(reason) {
-        console.log("FD");
+        $scope.errors.push("Failed to retreive list of repos");
       });
 
     } else {
+      $scope.createdAt = GitHubService.formatDate($rootScope.repoInfo.created_at);
+      $scope.lastUpdate = GitHubService.formatDate($rootScope.repoInfo.updated_at);
       setContributors($rootScope.repoInfo.contributors_url);
     }
 
@@ -38,30 +44,6 @@ angular.module('githubRepoViewerApp')
         })
       }
     }
-
-
-
-
-
-
-
-
-     /* var promise = GitHubService.getRepository(repoInfo);
-      promise.then(function(repoInfo) {
-        $rootScope.repoInfo = repoInfo.data;
-
-
-      }, function(reason) {
-        console.log("fail");
-      });
-    }
-
-    var promise2 = GitHubService.getContributors($rootScope.repoInfo.contributors_url);
-      promise2.then(function(response) {
-        $scope.contributors= response.data;
-      }, function(reason) {
-        console.log("fail");
-      }); */
   });
 
 

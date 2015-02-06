@@ -17,7 +17,7 @@ angular.module('githubRepoViewerApp')
           return deferred.promise;
       }
     },
-    
+
     getGithubData: function(url) {
       if (url) {
         var deferred = $q.defer();
@@ -44,7 +44,31 @@ angular.module('githubRepoViewerApp')
           });
           return deferred.promise;
       }
+    },
+
+    /*
+      Formats GMT date
+    */
+    formatDate: function(dateInput) {
+      var date = new Date(dateInput);
+      var month = this.formatMonth(date.getMonth());
+      var day = date.getDate();
+      var year = date.getFullYear();
+
+      var formatedDate = month + " " + day + ", " + year;
+      return formatedDate;
+    },
+
+    /*
+      * Return name of current month
+    */
+    formatMonth: function(month) {
+     var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        var thisMonth = months[month];
+        return thisMonth;
     }
+
+
 
 
   }
