@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('githubRepoViewerApp')
-  .controller('ContributorInfoCtr', function ($scope, $rootScope, $location, $routeParams, GitHubService) {
+  .controller('ContributorInfoCtr', function ($scope, $location, $routeParams, GitHubService) {
     $scope.contributor = $routeParams.contributor;
     $scope.joined;
     $scope.repositories;
@@ -19,23 +19,15 @@ angular.module('githubRepoViewerApp')
       });
     }
 
-    /*
-     * Check rootscope containing contributor info.
-     * Make http request if it's null.
-     */
-     if (!$rootScope.contributorInfo) {
+
         GitHubService.getUserInfo($scope.contributor).then (function(data) {
-          $rootScope.contributorInfo = data;
-          $scope.joined = GitHubService.formatDate($rootScope.contributorInfo.created_at);
-          setRepositories($rootScope.contributorInfo.repos_url);
+          $scope.contributorInfo = data;
+          $scope.joined = GitHubService.formatDate($scope.contributorInfo.created_at);
+          setRepositories($scope.contributorInfo.repos_url);
         }, function(reason) {
           $scope.errors.push("Failed to retreive user information");
       });
-     }
-     else {
-      $scope.joined = GitHubService.formatDate($rootScope.contributorInfo.created_at);
-        setRepositories($rootScope.contributorInfo.repos_url);
-     }
+
 
     /*
      * Go to the repository page.

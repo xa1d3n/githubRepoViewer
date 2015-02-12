@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('githubRepoViewerApp')
-  .controller('RepoInfoCtrl', function ($scope, $rootScope, $routeParams, $location, GitHubService) {
+  .controller('RepoInfoCtrl', function ($scope, $routeParams, $location, GitHubService) {
     $scope.owner = $routeParams.owner;
     $scope.repo = $routeParams.name;
     $scope.createdAt;
     $scope.lastUpdate;
     $scope.errors = [];
     $scope.contributors;
-    $rootScope.contributorInfo;
+    $scope.contributorInfo;
 
     /*
      * Retreive list of contributors related to repo
@@ -22,27 +22,16 @@ angular.module('githubRepoViewerApp')
       });
     }
 
-    /*
-     * Check rootscope containing repo info.
-     * Make http request if it's null.
-     */
-    if (!$rootScope.repoInfo) {
       var repoInfo = $scope.owner + '/' + $scope.repo;
 
       GitHubService.getRepository(repoInfo).then (function(data) {
-        $rootScope.repoInfo = data;
-        $scope.createdAt = GitHubService.formatDate($rootScope.repoInfo.created_at);
-        $scope.lastUpdate = GitHubService.formatDate($rootScope.repoInfo.updated_at);
+        $scope.repoInfo = data;
+        $scope.createdAt = GitHubService.formatDate($scope.repoInfo.created_at);
+        $scope.lastUpdate = GitHubService.formatDate($scope.repoInfo.updated_at);
         setContributors(data.contributors_url);
       }, function(reason) {
         $scope.errors.push("Failed to retreive list of repos");
       });
-
-    } else {
-      $scope.createdAt = GitHubService.formatDate($rootScope.repoInfo.created_at);
-      $scope.lastUpdate = GitHubService.formatDate($rootScope.repoInfo.updated_at);
-      setContributors($rootScope.repoInfo.contributors_url);
-    }
 
     /*
      * Go to the contributor page.
@@ -51,7 +40,7 @@ angular.module('githubRepoViewerApp')
     $scope.showContributorInfo = function(contributor) {
       if (contributor) {
         GitHubService.getUserInfo(contributor).then (function(data) {
-          $rootScope.contributorInfo = data;
+          $scope.contributorInfo = data;
           $location.url('/contributor/' + contributor);
         })
       }
